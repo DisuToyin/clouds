@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.search-suggestion-input {
+  outline: none;
+  border-radius: 25px;
+  border: 1px solid #bac0c5;
+}
+
+.suggestions-box {
+  position: relative;
+  border-radius: 0 0 25px 25px;
+  background-color: white;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  bottom: 1.5rem;
+}
+
+.suggestion-item {
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+.loading {
+  padding: 16px;
+  color: #999;
+}
+
+input[type="text"]::placeholder {
+  padding-left: 30px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.footer-image-mobile {
+  display: none;
+}
+@media (max-width: 371px) {
+  .footer-image {
+    display: none;
+  }
+
+  .footer-image-mobile {
+    display: block;
+  }
+}

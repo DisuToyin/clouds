@@ -1,0 +1,27 @@
+<%= render partial: 'partials/clouds2' %>
+
+<div class="mx-auto mt-[6rem] flex flex-col items-center justify-center  ">
+    <div class="mb-[2rem]">
+        <%= image_tag 'logo.svg', alt: 'app logo', class: 'mb-[2rem] mx-auto' %>
+        <p class="text-center">See what the weather is like in your city today!</p>
+
+    </div>
+    <div class=" ">
+        <%= form_tag("/search", method: "get", class: "p-[.5rem] flex flex-col") do %>  
+        <div class="search-wrapper relative">
+        <%= text_field_tag :location, "", id: "search-suggestion", placeholder: "Search for city", class: 'md:w-[22rem] w-[100%] search-suggestion-input p-[16px] ', autocomplete: "off" %>
+            <%= image_tag 'Vector.svg', id: "search-icon", alt: 'search', class: 'absolute left-4' %>
+          </div>
+        <%= submit_tag "Check Weather", id: "check-weather-btn", class: "mt-[1rem] hidden cursor-pointer bg-[#021735] p-[14px] mx-auto flex text-white  rounded-full" %>  
+        <div id="suggestions-box" class="mt-[1.5rem] suggestions-box  hidden"></div>
+        <% end %>
+    </div>
+</div>
+
+<%= render partial: 'partials/footer' %>
+
+
+
+
+
+<%= javascript_pack_tag 'custom' %>

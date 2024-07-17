@@ -1,0 +1,63 @@
+<%= render partial: 'partials/clouds' %>
+
+
+<div class="flex justify-between items-center mt-[2rem] px-[1rem]">
+  <%= link_to root_path do %>
+    <div class="flex flex-row gap-2 self-center cursor-pointer">
+      <%= image_tag 'Back.svg', alt: 'go back', class: 'w-[16px]' %>
+      <span class="sm:flex hidden">Check Weather</span>
+    </div>
+  <% end %>
+  
+  <div class="flex-row gap-2 sm:flex self-center justify-end hidden text-[#021735] font-[500]">  
+    <span> <%= Time.parse(@weather[:current_weather]['location']['localtime']).strftime("%H:%M") %></span>
+    <span><%= format_datetime(@weather[:current_weather]['location']['localtime']) %></span>
+  </div>
+
+</div>
+
+
+
+<div class="flex-row gap-2 flex text-center sm:hidden justify-center mt-[3.5rem] text-[14px] text-[#021735] font-[500]">  
+  <span> <%= Time.parse(@weather[:current_weather]['location']['localtime']).strftime("%H:%M") %></span>
+  <span><%= format_datetime(@weather[:current_weather]['location']['localtime']) %></span>
+</div>
+
+
+<div class="flex-col gap-2 flex mt-[1rem]  flex text-center text-[#021735]">  
+  <div class="flex justify-center items-center h-full w-full">
+    <div class="flex flex-row gap-2 bg-white rounded-full p-4 w-[fit-content] absolute top-[1rem]">
+      <%= image_tag 'LocationMarker.svg', alt: 'location marker', class: '' %>
+      <span class="font-[500] hidden sm:block"> <%= @weather[:current_weather]['location']['name'] %>, <%= @weather[:current_weather]['location']['country'] %> </span>
+      <span class="font-[500] sm:hidden block"> <%= @weather[:current_weather]['location']['name'] %> </span>
+    </div>
+  </div>
+  <span class="mt-[3rem] mb-[2rem] font-[500]"> <%= @weather[:greeting] %>  </span>
+  <h1 class="font-[700] sm:text-[6rem] text-[3rem]"> <%= @weather[:current_weather]['current']['temp_c'] %>°C </h1>
+  <p class="font-[700] text-[28px]"><%= @weather[:current_weather]['current']['condition']['text'] %> </p>
+  <div class="font-[500]">
+    <span>High  <%= @weather[:highest_temp] %>°C</span>
+    <span>Low <%= @weather[:lowest_temp] %>°C</span>
+  </div>
+  <div class="mt-2 font-[500]">
+    <span>Wind  <%= @weather[:current_weather]['current']['wind_kph'] %> k/hr</span>,
+    <span>Pressure <%= @weather[:current_weather]['current']['pressure_in'] %> inHg</span>,
+    <span>Humidity <%= @weather[:current_weather]['current']['humidity'] %></span>
+  </div>
+</div>
+
+
+
+<% if @weather[:forecast].length > 0 %>
+  <div class="flex flex-row bg-white rounded-full my-[5rem]  lg:px-[3rem] px-4 py-[1rem] mx-auto w-[fit-content] sm:w-[60%] justify-between">
+    <% @weather[:forecast].each do |hourly_forecast| %>
+      <div class="flex flex-col ">
+        <span class="text-center"> <%= hourly_forecast['temp_c'] %>°C</span>
+        <%= image_tag "https:#{hourly_forecast['condition']['icon']}", alt: 'Weather Icon', class: 'mx-auto' %>
+        <span class="text-center">
+            <%= Time.parse(hourly_forecast['time']).strftime("%H:%M") %>
+        </span>
+      </div>
+    <% end %>
+  </div
+<% end %>
